@@ -4,8 +4,10 @@ import { Input } from 'antd';
 
 export default () => {
     const menuReduer = useSelector((state) => state.menuReduer);
-    const pathname = window.location.pathname.split('/').join("");
-    const val = menuReduer.find(item => item.key === pathname.charAt(0)).children.find(item => item.key === pathname )
+    const pathname = window.location.pathname.split('/');
+
+    const val = menuReduer.find(item => item.key === pathname[1]).children.find(item => item.key === pathname[2]);
+    
     const dispatch = useDispatch();
     const onChange = (value) => {
         val.label = value.target.value
@@ -17,6 +19,6 @@ export default () => {
     }
     return <>
         <h2>{val.label}</h2>
-        <Input onChange={onChange} value={val.label} style={{width:200}}/>
+        <Input onChange={onChange}  value={val.label} />
     </>
 }

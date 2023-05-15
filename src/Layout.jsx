@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Menu, Button, Layout, } from 'antd';
+import { useNavigate, useRoutes } from 'react-router-dom';
+import { Menu, Button, Layout } from 'antd';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
 } from '@ant-design/icons';
-import BaseRouter from './pages/routes.jsx';
 import './global.less';
-import { connect } from 'react-redux';
-
+import { connect, useSelector } from 'react-redux';
 
 const { Header, Content, Sider } = Layout;
+
+const BaseRouter = () => {   
+    const menuRouter = useSelector(state => state.menuReduer);
+    const setRouter = (list) => {
+        return list?.map(item => {
+            return {
+                path: item.key,
+                element: item.element,
+                children: setRouter(item.children)
+            }
+        })
+    };
+    const elementRender = useRoutes(setRouter(menuRouter));
+    return elementRender;
+};
 
 export default connect(state => state)((props) => {
     const { menuReduer } = props;
@@ -51,7 +64,8 @@ export default connect(state => state)((props) => {
                         inlineCollapsed={collapsed}
                         items={menuReduer}
                         onSelect={(router) => {
-                            navigate(router.key)
+                            console.log('router', router);
+                            navigate(`${router.keyPath[1]}/${router.keyPath[0]}`)
                         }}
                     />
                 </Sider>

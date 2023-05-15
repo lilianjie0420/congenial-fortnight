@@ -20670,6 +20670,10 @@ var Header = antd__WEBPACK_IMPORTED_MODULE_4__["default"].Header,
   var toggleCollapsed = function toggleCollapsed() {
     setCollapsed(!collapsed);
   };
+  var menuRouter = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
+    return state;
+  });
+  console.log('menuRouter', menuRouter);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(antd__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Header, {
     className: "header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
